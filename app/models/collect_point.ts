@@ -4,6 +4,8 @@ import CollectType from './collect_type.js'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
 
 export default class CollectPoint extends BaseModel {
+  static table = 'collect_point'
+
   @column({ isPrimary: true })
   declare id: number
 

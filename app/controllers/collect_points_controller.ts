@@ -6,7 +6,8 @@ export default class CollectPointsController {
    * Display a list of resource
    */
   async index({ }: HttpContext) {
-    const collectPoints = CollectPoint.query().preload('collectTypes')
+    const collectPoints = CollectPoint.query()
+    console.log(collectPoints);
     return await collectPoints
   }
 
