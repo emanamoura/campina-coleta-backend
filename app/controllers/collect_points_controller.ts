@@ -5,10 +5,20 @@ export default class CollectPointsController {
   /**
    * Display a list of resource
    */
-  async index({ }: HttpContext) {
-    const collectPoints = CollectPoint.query()
-    console.log(collectPoints);
-    return await collectPoints
+  async index({ request }: HttpContext) {
+    const name = request.qs().name
+
+    // Base query
+    const collectPointsQuery = CollectPoint.query()
+
+    // Apply search filter if name is provided
+    if (name) {
+      collectPointsQuery.where('name', 'like', `%${name}%`)
+    }
+
+    // Execute query and return results
+    const collectPoints = await collectPointsQuery
+    return collectPoints
   }
 
   /**
@@ -24,6 +34,13 @@ export default class CollectPointsController {
    */
   async show({ params }: HttpContext) {
     return await CollectPoint.findOrFail(params.id)
+  }
+
+  async searchByName({ request }: HttpContext) {
+    const name = request.input('name')
+    const collectPoints = await CollectPoint.query()
+      .where('name', 'like', `%${name}%`)
+    return collectPoints
   }
   
 

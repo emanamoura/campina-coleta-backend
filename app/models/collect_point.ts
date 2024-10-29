@@ -16,10 +16,10 @@ export default class CollectPoint extends BaseModel {
   declare embedCode: string
 
   @column()
-  declare openAt: DateTime
+  declare openAt: string
 
   @column()
-  declare closeAt: DateTime
+  declare closeAt: string
 
   @column()
   declare phone: string
